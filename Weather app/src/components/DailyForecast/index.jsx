@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 
 export default function DailyForecast({data}) {
 
-    const next5Days = data.daily.slice(1, 6).map((dailyItem) => ({
+    const next5Days = data.daily.slice(0, 5).map((dailyItem) => ({
         day: new Date(dailyItem.dt * 1000).toLocaleDateString('en-US', {
             weekday: 'long',
         }),

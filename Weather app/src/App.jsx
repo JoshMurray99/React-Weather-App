@@ -12,16 +12,21 @@ import { fetchWeatherData } from '../Hooks/FetchWeatherData';
 import CurrentWeather from './components/CurrentWeather';
 import HourlyForecast from './components/HourlyForecast';
 import DailyForecast from './components/DailyForecast';
+import SearchHistoryTable from './components/SearchHistoryTable';
 
 function App() {
   const [citySearch, setCitySearch] = useState('');
+  const [selectedCity, setSelectedCity] = useState('')
   const [cityOptions, setCityOptions] = useState([]);
   const [showList, setShowList] = useState(true);
   const [weatherData, setWeatherData] = useState(null)
+  const [searchHistory, setSearchHistory] = useState([]);
+
 
   const API_KEY = import.meta.env.VITE_API_KEY;
 
   const handleSelection = (city, state, lon, lat) => {
+    setSelectedCity(`${city}, ${state}`); 
     setCitySearch(`${city}, ${state}`); 
     setShowList(false);
     getWeatherData(lat, lon)
@@ -54,10 +59,24 @@ function App() {
   }
 
   async function getWeatherData(lat, lon) {
-    const data = await fetchWeatherData(lat, lon)
-    setWeatherData(data)
-    
+    try {
+      const data = await fetchWeatherData(lat, lon);
+  
+      const newSearchEntry = {
+        location: citySearch,
+        timestamp: new Date(), // Current timestamp
+        currentTemp: data.current.temp,
+        tempMin: data.daily[0].temp.min,
+        tempMax: data.daily[0].temp.max,
+      };
+  
+      setSearchHistory([newSearchEntry, ...searchHistory]); // Add new entry to the beginning of the array
+      setWeatherData(data);
+    } catch (error) {
+      console.log(error);
+    }
   }
+  
 
   return (
     <>
@@ -88,9 +107,10 @@ function App() {
         
         {weatherData && (
           <>
-          <CurrentWeather data={weatherData} city={citySearch}/>
+          <CurrentWeather data={weatherData} city={selectedCity}/>
           <HourlyForecast data={weatherData}  />
           <DailyForecast data={weatherData} />
+          <SearchHistoryTable searchHistoryData={searchHistory} />
           </>
         )}
     </>
