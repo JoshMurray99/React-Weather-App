@@ -19,7 +19,7 @@ export default function DailyForecast({data}) {
     }));
     return (
         <div>
-        <Box sx={{ display: 'flex', mt: 5 }}>
+        <Box sx={{ display: 'flex', mt: 2 }}>
           {next5Days.map((day, index) => (
             <Grid key={index}>
               <Card variant="outlined">
