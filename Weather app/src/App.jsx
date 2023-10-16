@@ -37,7 +37,7 @@ function App() {
     setShowList(true);
     const options = {
       method: 'GET',
-      url: 'http://api.openweathermap.org/geo/1.0/direct',
+      url: 'https://api.openweathermap.org/geo/1.0/direct',
       params: {
         q: `${citySearch}`,
         limit: 5,
