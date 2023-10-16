@@ -15,7 +15,7 @@ export default function HourlyForecast({ data }) {
     return (
         <div>
 
-            <Box sx={{ display: 'flex', mt: 4 }}>
+            <Box sx={{ display: 'flex', mt: 2 }}>
 
                 {next5Hours.map((hour, index) => (
                     <Grid key={index} >

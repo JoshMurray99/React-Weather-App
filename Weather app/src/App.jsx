@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Box, Button, List, ListItem, ListItemButton, ListItemText, TextField } from '@mui/material';
+import { Box, Button, List, ListItem, ListItemButton, ListItemText, TextField, Tab, Tabs } from '@mui/material';
 import { fetchWeatherData } from './Hooks/FetchWeatherData';
 import { fetchCityNames } from './Hooks/FetchCityNames';
+import './App.css'
 
 import CurrentWeather from './components/CurrentWeather';
 import HourlyForecast from './components/HourlyForecast';
@@ -15,6 +16,7 @@ function App() {
   const [showList, setShowList] = useState(true);
   const [weatherData, setWeatherData] = useState(null);
   const [searchHistory, setSearchHistory] = useState([]);
+  const [tabValue, setTabValue] = useState(0);
 
   const handleSelection = (city, state, lon, lat) => {
     setSelectedCity(`${city}, ${state}`);
@@ -57,7 +59,7 @@ function App() {
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <Box sx={{ display: 'flex' }}>
         <TextField
           id="outlined-basic"
@@ -65,6 +67,7 @@ function App() {
           variant="outlined"
           onChange={(e) => setCitySearch(e.target.value)}
           value={citySearch}
+          sx={{ width: 400 }}
         />
         <Button variant="contained" onClick={getCities}>
           Search
@@ -72,7 +75,7 @@ function App() {
       </Box>
 
       {cityOptions.length > 0 && showList && (
-        <List>
+        <List sx={{ width: 500 }}>
           {cityOptions.map((city, index) => (
             <ListItem key={index} disablePadding>
               <ListItemButton onClick={() => handleSelection(city.name, city.state, city.lon, city.lat)}>
@@ -86,8 +89,12 @@ function App() {
       {weatherData && (
         <>
           <CurrentWeather data={weatherData} city={selectedCity} />
-          <HourlyForecast data={weatherData} />
-          <DailyForecast data={weatherData} />
+          <Tabs value={tabValue} onChange={(event, newValue) => setTabValue(newValue)} sx={{mt: 2}}>
+            <Tab label="Hourly Forecast" />
+            <Tab label="Daily Forecast" />
+          </Tabs>
+          {tabValue === 0 && <HourlyForecast data={weatherData} />}
+          {tabValue === 1 && <DailyForecast data={weatherData} />}
           <SearchHistoryTable searchHistoryData={searchHistory} />
         </>
       )}
@@ -96,4 +103,3 @@ function App() {
 }
 
 export default App;
-

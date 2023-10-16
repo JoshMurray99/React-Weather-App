@@ -31,7 +31,7 @@ export default function SearchHistoryTable({ searchHistoryData }) {
         <TableRow>
           <TableCell>
             <Typography variant='h6'>
-            Search History Data
+            Search History By Location
             </Typography>
             </TableCell>
           

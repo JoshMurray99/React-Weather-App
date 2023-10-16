@@ -34,7 +34,7 @@ export default function CurrentWeather({ data, city }) {
   return (
     <>
       <Box sx={{ display: 'flex', mt: 4 }}>
-        <Card variant="outlined" sx={{ minWidth: 332 }}>
+        <Card variant="outlined" sx={{ minWidth: 332}}>
           <CardContent>
             <Typography sx={{ fontSize: 18 }}>
               {weatherData.name}
@@ -48,7 +48,7 @@ export default function CurrentWeather({ data, city }) {
               image={imgurl}
               alt={weatherData.weather}
             />
-            <Typography sx={{ fontSize: 16 }}>
+            <Typography sx={{ fontSize: 18, textAlign: 'center' }}>
               {weatherData.weather}
             </Typography>
           </CardContent>
