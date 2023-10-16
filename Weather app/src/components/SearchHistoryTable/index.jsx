@@ -25,7 +25,7 @@ export default function SearchHistoryTable({ searchHistoryData }) {
   }, [searchHistoryData]);
     
   return (
-    <Box sx={{width: 675, mt: 4}}>
+    <Box sx={{ mt: 4}}>
     <Table>
       <TableHead>
         <TableRow>

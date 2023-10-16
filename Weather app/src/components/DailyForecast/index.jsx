@@ -10,7 +10,7 @@ export default function DailyForecast({data}) {
 
     const next5Days = data.daily.slice(0, 5).map((dailyItem) => ({
         day: new Date(dailyItem.dt * 1000).toLocaleDateString('en-US', {
-            weekday: 'long',
+            weekday: 'short',
         }),
         temp: dailyItem.temp.day,
         icon: dailyItem.weather[0].icon,
@@ -19,7 +19,7 @@ export default function DailyForecast({data}) {
     }));
     return (
         <div>
-        <Box sx={{ display: 'flex', mt: 2 }}>
+        <Box sx={{ display: 'flex', mt: 2, flexWrap: 'wrap', justifyContent: 'center' }}>
           {next5Days.map((day, index) => (
             <Grid key={index}>
               <Card variant="outlined">

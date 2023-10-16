@@ -34,7 +34,12 @@ export default function CurrentWeather({ data, city }) {
   return (
     <>
       <Box sx={{ display: 'flex', mt: 4 }}>
-        <Card variant="outlined" sx={{ minWidth: 332}}>
+      <Card variant="outlined" sx={{
+          width: '100%', 
+          '@media (min-width: 675px)': {
+            width: '332px', 
+          },
+        }}>
           <CardContent>
             <Typography sx={{ fontSize: 18 }}>
               {weatherData.name}
@@ -54,7 +59,12 @@ export default function CurrentWeather({ data, city }) {
           </CardContent>
         </Card>
 
-        <Card variant='outlined' sx={{ minWidth: 332 }}>
+        <Card variant="outlined" sx={{
+          width: '100%', 
+          '@media (min-width: 675px)': {
+            width: '332px', 
+          },
+        }}>
           <CardContent>
             <Typography variant="h6">
               {localTime.toLocaleDateString()}

@@ -67,7 +67,12 @@ function App() {
           variant="outlined"
           onChange={(e) => setCitySearch(e.target.value)}
           value={citySearch}
-          sx={{ width: 400 }}
+          sx={{
+            width: '100%', 
+            '@media (min-width: 675px)': {
+              width: '332px', 
+            },
+          }}
         />
         <Button variant="contained" onClick={getCities}>
           Search
@@ -75,7 +80,12 @@ function App() {
       </Box>
 
       {cityOptions.length > 0 && showList && (
-        <List sx={{ width: 500 }}>
+        <List sx={{
+          width: '100%', 
+          '@media (min-width: 675px)': {
+            width: '332px', 
+          },
+        }}>
           {cityOptions.map((city, index) => (
             <ListItem key={index} disablePadding>
               <ListItemButton onClick={() => handleSelection(city.name, city.state, city.lon, city.lat)}>
